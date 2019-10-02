@@ -40,8 +40,8 @@ class _LoginPageState extends State<LoginPage> {
               duration: Duration(milliseconds: 500),
               child: Center(
                   child: _ifLogin
-                      ? FractionallySizedBox(
-                      widthFactor: 0.8,
+                      ? Container(
+                      constraints: BoxConstraints(maxWidth: 350),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
@@ -62,14 +62,18 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(fontSize: 16.0),
                           ),
                           Padding(padding: EdgeInsets.only(top: 25.0)),
-                          RaisedButton(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0)),
-                            color: Color(0xFF000080),
-                            textColor: Color(0xFFFFFFFF),
-                            onPressed: () {},
-                            child: new Text(
-                              "Entrar",
+                          SizedBox(
+                            height: 50.0,
+                            width: double.infinity,
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0)),
+                              color: Color(0xFF000080),
+                              textColor: Color(0xFFFFFFFF),
+                              onPressed: () {},
+                              child: new Text(
+                                "Entrar",
+                              ),
                             ),
                           )
                         ],
