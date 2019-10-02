@@ -8,6 +8,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var _opacity = 0.0;
   var _ifLogin = false;
+  var _ifLoading = false;
+  var _loginController = TextEditingController(),
+      _passwordController = TextEditingController();
 
   void initState() {
     super.initState();
@@ -31,6 +34,29 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
+  void _handleConfirmation(BuildContext context){
+    if(_loginController.text == '' || _passwordController.text == '') {
+      setState(() => _ifLoading = true);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Falhou'),
+              content: Text('Login e/ou senha inválidos!'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    setState(() => _ifLoading = false);
+                  },
+                )
+              ],
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           TextField(
+                            controller: _loginController,
                             decoration: InputDecoration(
                               hintText: "Login",
                             ),
@@ -54,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Padding(padding: EdgeInsets.only(top: 15.0)),
                           TextField(
+                            controller: _passwordController,
                             obscureText: true,
                             decoration: InputDecoration(
                               hintText: "Senha",
@@ -62,17 +90,21 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(fontSize: 16.0),
                           ),
                           Padding(padding: EdgeInsets.only(top: 25.0)),
-                          SizedBox(
-                            height: 50.0,
-                            width: double.infinity,
-                            child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0)),
-                              color: Color(0xFF000080),
-                              textColor: Color(0xFFFFFFFF),
-                              onPressed: () {},
-                              child: new Text(
-                                "Entrar",
+                          AnimatedOpacity(
+                            duration: Duration(milliseconds: 200),
+                            opacity: _ifLoading ? 0.2 : 1.0,
+                            child: SizedBox(
+                              height: 50.0,
+                              width: double.infinity,
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0)),
+                                color: Color(0xFF000080),
+                                textColor: Color(0xFFFFFFFF),
+                                onPressed: () => _handleConfirmation(context),
+                                child: new Text(
+                                  "Entrar",
+                                ),
                               ),
                             ),
                           )
