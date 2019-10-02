@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:comunicalab_frontend/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -34,10 +35,10 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void _handleConfirmation(BuildContext context){
+  void _handleConfirmation(BuildContext context) async {
     if(_loginController.text == '' || _passwordController.text == '') {
       setState(() => _ifLoading = true);
-      showDialog(
+      return showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
@@ -55,6 +56,12 @@ class _LoginPageState extends State<LoginPage> {
             );
           });
     }
+
+    setState(() => _ifLoading = true);
+    await Future.delayed(Duration(seconds: 1));
+
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => HomePage()));
   }
 
   @override
@@ -72,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           TextField(
+                            enabled: !_ifLoading,
                             controller: _loginController,
                             decoration: InputDecoration(
                               hintText: "Login",
@@ -81,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           Padding(padding: EdgeInsets.only(top: 15.0)),
                           TextField(
+                            enabled: !_ifLoading,
                             controller: _passwordController,
                             obscureText: true,
                             decoration: InputDecoration(

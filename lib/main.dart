@@ -12,6 +12,9 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFFF8F8FF),
           fontFamily: 'Roboto',
           inputDecorationTheme: InputDecorationTheme(
+              disabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                  borderSide: BorderSide(color: Color(0xFF000080), width: 2.0)),
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
                   borderSide: BorderSide(color: Color(0xFF000080), width: 2.0)),
