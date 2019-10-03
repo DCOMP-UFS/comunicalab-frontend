@@ -124,19 +124,22 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Comunica-lab"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: (){},
-          )
-        ],
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Comunica-lab"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.notifications),
+              onPressed: (){},
+            )
+          ],
+        ),
+        drawer: ListTileTheme(
+            iconColor: Color(0xFF000080),
+            child: _handlerSideBar()), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-      drawer: ListTileTheme(
-          iconColor: Color(0xFF000080),
-          child: _handlerSideBar()), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
