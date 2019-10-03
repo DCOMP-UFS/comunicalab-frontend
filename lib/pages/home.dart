@@ -10,6 +10,32 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   final headerTextStyle = TextStyle(color: Color(0xFFFFFFFF), fontSize: 14.0);
 
+  void _handleLogout(BuildContext context) async {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Tem certeza que deseja sair desta sessão?'),
+            content: Text('Sua sessão com este usuário será encerrada.'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Sim'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();},
+              ),
+              FlatButton(
+                child: Text('Não'),
+                onPressed: () {Navigator.of(context).pop();},
+              )
+            ],
+          );
+        });
+
+  }
+
   Widget _handlerSideBar(){
     return Drawer(
       child: SingleChildScrollView(
@@ -88,7 +114,7 @@ class HomePageState extends State<HomePage> {
             ListTile(
               leading: Icon(MdiIcons.logout),
               title: Text('Logout'),
-              onTap: (){},
+              onTap: () => _handleLogout(context),
             )
           ],
         ),
