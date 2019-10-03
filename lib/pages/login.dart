@@ -49,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               actions: <Widget>[
                 FlatButton(
                   child: Text('OK'),
+                  textColor: Color(0xFF000080),
                   onPressed: () {
                     Navigator.of(context).pop();
                     setState(() => _ifLoading = false);

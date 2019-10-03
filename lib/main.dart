@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto',
           textTheme: TextTheme(subhead: TextStyle(color: Color(0xFF000080))),
           unselectedWidgetColor: Color(0xFF000080),
+          dialogTheme: DialogTheme(contentTextStyle: TextStyle(color: Color(0xFF4F4F4F))),
           inputDecorationTheme: InputDecorationTheme(
               disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),

@@ -21,6 +21,7 @@ class HomePageState extends State<HomePage> {
             actions: <Widget>[
               FlatButton(
                 child: Text('Sim'),
+                textColor: Color(0xFF000080),
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).pop();
@@ -28,6 +29,7 @@ class HomePageState extends State<HomePage> {
               ),
               FlatButton(
                 child: Text('Não'),
+                textColor: Color(0xFF000080),
                 onPressed: () {Navigator.of(context).pop();},
               )
             ],
