@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
       setState(() => _ifLoading = true);
       return showDialog(
           context: context,
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Login Malsucedido'),
