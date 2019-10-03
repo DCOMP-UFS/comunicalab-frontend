@@ -10,7 +10,7 @@ class HomePageState extends State<HomePage> {
 
   Widget _handlerSideBar(){
     return Drawer(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           UserAccountsDrawerHeader(
             margin: EdgeInsets.all(0.0),
@@ -22,6 +22,63 @@ class HomePageState extends State<HomePage> {
             ),
             accountEmail: Text('email@email.com', style: headerTextStyle),
             onDetailsPressed: (){},
+          ),
+          ExpansionTile(
+            title: Text('Software'),
+            children: <Widget>[
+              ListTile(
+                title: Text('Cadastrar software'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Listar softwares'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Cadastrar categorias'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Registrar instalação'),
+                onTap: (){},
+              )
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Equipamento'),
+            children: <Widget>[
+              ListTile(
+                title: Text('Cadastrar equipamento'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Listar equipamentos'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Cadastrar categorias'),
+                onTap: (){},
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Laboratório'),
+            children: <Widget>[
+              ListTile(
+                title: Text('Cadastrar laboratório'),
+                onTap: (){},
+              ),
+              ListTile(
+                title: Text('Listar laboratórios'),
+                onTap: (){},
+              )
+            ],
+          ),
+          ExpansionTile(
+            title: Text('Configurações'),
+          ),
+          ExpansionTile(
+            title: Text('Logout'),
           )
         ],
       ),
