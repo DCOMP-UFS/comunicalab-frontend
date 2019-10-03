@@ -27,6 +27,7 @@ class HomePageState extends State<HomePage> {
           ),
           ExpansionTile(
             title: Text('Software'),
+            leading: Icon(MdiIcons.console),
             children: <Widget>[
               ListTile(
                 title: Text('Cadastrar software'),
@@ -48,6 +49,7 @@ class HomePageState extends State<HomePage> {
           ),
           ExpansionTile(
             title: Text('Equipamento'),
+            leading: Icon(MdiIcons.projector),
             children: <Widget>[
               ListTile(
                 title: Text('Cadastrar equipamento'),
@@ -65,6 +67,7 @@ class HomePageState extends State<HomePage> {
           ),
           ExpansionTile(
             title: Text('Laboratório'),
+            leading: Icon(MdiIcons.desktopTowerMonitor),
             children: <Widget>[
               ListTile(
                 title: Text('Cadastrar laboratório'),
@@ -77,9 +80,11 @@ class HomePageState extends State<HomePage> {
             ],
           ),
           ExpansionTile(
+            leading: Icon(Icons.settings),
             title: Text('Configurações'),
           ),
           ExpansionTile(
+            leading: Icon(MdiIcons.logout),
             title: Text('Logout'),
           )
         ],
