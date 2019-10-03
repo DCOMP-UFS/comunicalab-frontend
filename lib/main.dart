@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'ComunicaLab',
+      title: 'Comunica-lab',
       theme: ThemeData(
           primaryColor: Color(0xFFF8F8FF),
           fontFamily: 'Roboto',
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5.0),
                   borderSide:
                       BorderSide(color: Color(0xFF000080), width: 2.0))),
+          primaryIconTheme: IconThemeData(color: Color(0xFF000080)),
           primaryTextTheme: Theme.of(context)
               .primaryTextTheme
               .apply(bodyColor: Color(0xFF000080)),

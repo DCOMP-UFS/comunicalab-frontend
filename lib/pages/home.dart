@@ -11,9 +11,14 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("App Bar"),
+        title: Text("Comunica-lab"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: (){},
+          )
+        ],
       ),
-      body: Text("Filters"),
       drawer: Drawer(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

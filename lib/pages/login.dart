@@ -42,7 +42,7 @@ class _LoginPageState extends State<LoginPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Login Falhou'),
+              title: Text('Login Malsucedido'),
               content: Text('Login e/ou senha inválidos!'),
               actions: <Widget>[
                 FlatButton(
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
           });
     }
 
-    setState(() => _ifLoading = true);
+    setState(() => _ifLoading = true);            //Simulação de processamento de login
     await Future.delayed(Duration(seconds: 1));
 
     Navigator.of(context).push(MaterialPageRoute(
