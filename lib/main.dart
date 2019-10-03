@@ -11,6 +11,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color(0xFF000080),
           fontFamily: 'Roboto',
+          textTheme: TextTheme(subhead: TextStyle(color: Color(0xFF000080))),
+          unselectedWidgetColor: Color(0xFF000080),
           inputDecorationTheme: InputDecorationTheme(
               disabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(5.0),
@@ -24,12 +26,8 @@ class MyApp extends StatelessWidget {
                       BorderSide(color: Color(0xFF000080), width: 2.0))),
           appBarTheme: AppBarTheme(color: Color(0xFFF8F8FF)),
           primaryIconTheme: IconThemeData(color: Color(0xFF000080)),
-          primaryTextTheme: Theme.of(context)
-              .primaryTextTheme
-              .apply(bodyColor: Color(0xFF000080)),
-          accentTextTheme: Theme.of(context)
-              .primaryTextTheme
-              .apply(bodyColor: Color(0xFF4682B4))
+          primaryTextTheme: Theme.of(context).primaryTextTheme.apply(bodyColor: Color(0xFF000080)),
+          accentTextTheme: Theme.of(context).primaryTextTheme.apply(bodyColor: Color(0xFF4682B4))
       ),
       home: LoginPage(),
     );

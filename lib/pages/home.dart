@@ -31,19 +31,19 @@ class HomePageState extends State<HomePage> {
               leading: Icon(MdiIcons.console),
               children: <Widget>[
                 ListTile(
-                  title: Text('Cadastrar software'),
+                  title: Text('Cadastrar software', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Listar softwares'),
+                  title: Text('Listar softwares', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Cadastrar categorias'),
+                  title: Text('Cadastrar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Registrar instalação'),
+                  title: Text('Registrar instalação', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 )
               ],
@@ -53,15 +53,15 @@ class HomePageState extends State<HomePage> {
               leading: Icon(MdiIcons.projector),
               children: <Widget>[
                 ListTile(
-                  title: Text('Cadastrar equipamento'),
+                  title: Text('Cadastrar equipamento', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Listar equipamentos'),
+                  title: Text('Listar equipamentos', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Cadastrar categorias'),
+                  title: Text('Cadastrar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
               ],
@@ -71,11 +71,11 @@ class HomePageState extends State<HomePage> {
               leading: Icon(MdiIcons.desktopTowerMonitor),
               children: <Widget>[
                 ListTile(
-                  title: Text('Cadastrar laboratório'),
+                  title: Text('Cadastrar laboratório', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
                 ListTile(
-                  title: Text('Listar laboratórios'),
+                  title: Text('Listar laboratórios', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 )
               ],
