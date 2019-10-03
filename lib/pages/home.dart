@@ -12,82 +12,86 @@ class HomePageState extends State<HomePage> {
 
   Widget _handlerSideBar(){
     return Drawer(
-      child: ListView(
-        children: <Widget>[
-          UserAccountsDrawerHeader(
-            margin: EdgeInsets.all(0.0),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Color(0xFFFFFFFF),
-              child: Icon(Icons.person_outline,
-              color: Color(0xFF000080),
-              size: 64),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              margin: EdgeInsets.all(0.0),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Color(0xFFFFFFFF),
+                child: Icon(Icons.person_outline,
+                    color: Color(0xFF000080),
+                    size: 64),
+              ),
+              accountEmail: Text('email@email.com', style: headerTextStyle),
+              onDetailsPressed: (){},
             ),
-            accountEmail: Text('email@email.com', style: headerTextStyle),
-            onDetailsPressed: (){},
-          ),
-          ExpansionTile(
-            title: Text('Software'),
-            leading: Icon(MdiIcons.console),
-            children: <Widget>[
-              ListTile(
-                title: Text('Cadastrar software'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Listar softwares'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Cadastrar categorias'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Registrar instalação'),
-                onTap: (){},
-              )
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Equipamento'),
-            leading: Icon(MdiIcons.projector),
-            children: <Widget>[
-              ListTile(
-                title: Text('Cadastrar equipamento'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Listar equipamentos'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Cadastrar categorias'),
-                onTap: (){},
-              ),
-            ],
-          ),
-          ExpansionTile(
-            title: Text('Laboratório'),
-            leading: Icon(MdiIcons.desktopTowerMonitor),
-            children: <Widget>[
-              ListTile(
-                title: Text('Cadastrar laboratório'),
-                onTap: (){},
-              ),
-              ListTile(
-                title: Text('Listar laboratórios'),
-                onTap: (){},
-              )
-            ],
-          ),
-          ExpansionTile(
-            leading: Icon(Icons.settings),
-            title: Text('Configurações'),
-          ),
-          ExpansionTile(
-            leading: Icon(MdiIcons.logout),
-            title: Text('Logout'),
-          )
-        ],
+            ExpansionTile(
+              title: Text('Software'),
+              leading: Icon(MdiIcons.console),
+              children: <Widget>[
+                ListTile(
+                  title: Text('Cadastrar software'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Listar softwares'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Cadastrar categorias'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Registrar instalação'),
+                  onTap: (){},
+                )
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Equipamento'),
+              leading: Icon(MdiIcons.projector),
+              children: <Widget>[
+                ListTile(
+                  title: Text('Cadastrar equipamento'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Listar equipamentos'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Cadastrar categorias'),
+                  onTap: (){},
+                ),
+              ],
+            ),
+            ExpansionTile(
+              title: Text('Laboratório'),
+              leading: Icon(MdiIcons.desktopTowerMonitor),
+              children: <Widget>[
+                ListTile(
+                  title: Text('Cadastrar laboratório'),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Listar laboratórios'),
+                  onTap: (){},
+                )
+              ],
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Configurações'),
+              onTap: (){},
+            ),
+            ListTile(
+              leading: Icon(MdiIcons.logout),
+              title: Text('Logout'),
+              onTap: (){},
+            )
+          ],
+        ),
       ),
     );
   }
