@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:comunicalab_frontend/pages/home.dart';
 
 class LoginPage extends StatefulWidget {
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -63,6 +64,11 @@ class _LoginPageState extends State<LoginPage> {
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (BuildContext context) => HomePage()));
+    setState(() {
+      _ifLoading = false;
+      _loginController.clear();
+      _passwordController.clear();
+    });
   }
 
   @override
@@ -106,14 +112,17 @@ class _LoginPageState extends State<LoginPage> {
                             child: SizedBox(
                               height: 50.0,
                               width: double.infinity,
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0)),
-                                color: Color(0xFF000080),
-                                textColor: Color(0xFFFFFFFF),
-                                onPressed: () => _handleConfirmation(context),
-                                child: new Text(
-                                  "Entrar",
+                              child: AbsorbPointer(
+                                absorbing: _ifLoading,
+                                child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0)),
+                                  color: Color(0xFF000080),
+                                  textColor: Color(0xFFFFFFFF),
+                                  onPressed: () => _handleConfirmation(context),
+                                  child: new Text(
+                                    "Entrar",
+                                  ),
                                 ),
                               ),
                             ),
