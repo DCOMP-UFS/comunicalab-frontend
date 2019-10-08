@@ -71,7 +71,15 @@ class HomePageState extends State<HomePage> {
                   onTap: (){},
                 ),
                 ListTile(
+                  title: Text('Listar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
+                  onTap: (){},
+                ),
+                ListTile(
                   title: Text('Registrar instalação', style: TextStyle(color: Color(0xFF6A5ACD))),
+                  onTap: (){},
+                ),
+                ListTile(
+                  title: Text('Ver instalações', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 )
               ],
@@ -92,6 +100,10 @@ class HomePageState extends State<HomePage> {
                   title: Text('Cadastrar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
                   onTap: (){},
                 ),
+                ListTile(
+                  title: Text('Listar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
+                  onTap: (){},
+                )
               ],
             ),
             ExpansionTile(
