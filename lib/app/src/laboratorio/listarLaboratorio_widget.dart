@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:comunicalab_frontend/app/src/laboratorio/listarLaboratorio_module.dart';
+import 'package:comunicalab_frontend/app/src/laboratorio/models/laboratorio_model.dart';
+import 'package:comunicalab_frontend/app/src/laboratorio/laboratorio_bloc.dart';
 
 class ListarLaboratorio extends StatefulWidget {
   @override
@@ -17,6 +20,7 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
         this._searchIcon = Icon(Icons.close);
         this._appBarTitle = TextField(
           controller: _filter,
+          autofocus: true,
           decoration: InputDecoration(
               prefixIcon: Icon(Icons.search),
               enabledBorder: OutlineInputBorder(
@@ -34,19 +38,25 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: _appBarTitle,
-        actions: <Widget>[
-          IconButton(
-            icon: _searchIcon,
-            onPressed: () => _searchPressed(),
-          )
-        ],
-      ),
-      body: Center(
-        child: Text('Hello Listar Laboratórios'),
-      ),
+    return StreamBuilder<List<Laboratorio>>(
+      stream: ListarLaboratorioModule.to.bloc<LaboratorioBloc>().laboratorios,
+      initialData: [],
+      builder: (context, snapshot) {
+        return Scaffold(
+          appBar: AppBar(
+            title: _appBarTitle,
+            actions: <Widget>[
+              IconButton(
+                icon: _searchIcon,
+                onPressed: () => _searchPressed(),
+              )
+            ],
+          ),
+          body: Center(
+            child: Text('Hello Listar Laboratórios'),
+          ),
+        );
+      }
     );
   }
 }
