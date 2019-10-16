@@ -79,23 +79,27 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
     return ListView.builder(
       itemCount: filteredLabs.length,
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          title: Text(filteredLabs[index].name),
-          subtitle: Text(
-              'Capacidade: ${filteredLabs[index].capacity.toString()} pessoas'),
-          trailing: PopupMenuButton<String>(
-            onSelected: _popupSelect,
-            itemBuilder: (BuildContext context) {
-              return _popupChoices.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(
-                    choice,
-                    style: TextStyle(color: Color(0xFF4F4F4F)),
-                  ),
-                );
-              }).toList();
-            },
+        return Container(
+          color: Color(0xFFF8F8FF),
+          child: ListTile(
+            title: Text(filteredLabs[index].name),
+            subtitle: Text(
+                'Capacidade: ${filteredLabs[index].capacity.toString()} pessoas',
+                style: TextStyle(color: Color(0xFF4682B4))),
+            trailing: PopupMenuButton<String>(
+              onSelected: _popupSelect,
+              itemBuilder: (BuildContext context) {
+                return _popupChoices.map((String choice) {
+                  return PopupMenuItem<String>(
+                    value: choice,
+                    child: Text(
+                      choice,
+                      style: TextStyle(color: Color(0xFF4F4F4F)),
+                    ),
+                  );
+                }).toList();
+              },
+            ),
           ),
         );
       },
