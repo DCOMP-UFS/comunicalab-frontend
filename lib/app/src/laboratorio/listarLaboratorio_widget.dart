@@ -14,6 +14,26 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
   Icon _searchIcon = Icon(Icons.search);
   Widget _appBarTitle = Text('Lista de laboratórios');
 
+  final List<String> _popupChoices = [
+    'Editar laboratório',
+    'Excluir laboratório',
+    'Ver equipamentos'
+  ];
+
+  ListarLaboratorioState() {
+    _filter.addListener(() {
+      if (_filter.text.isEmpty) {
+        setState(() {
+          _searchText = "";
+        });
+      } else {
+        setState(() {
+          _searchText = _filter.text;
+        });
+      }
+    });
+  }
+
   void _searchPressed() {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
@@ -36,27 +56,69 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
     });
   }
 
+  void _popupSelect(String choice) {
+    /*if(choice == 'Editar laboratório')
+      rota para tela de editar laboratório
+    else if(choice == 'Excluir laboratório')
+      rota para tela de excluir laboratório
+    else 
+      rota para tela de exibição de equipamentos do laboratório*/
+  }
+
+  Widget _buildList(List<Laboratorio> labs) {
+    List<Laboratorio> filteredLabs = [];
+
+    labs.forEach((lab) {
+      if (lab.name.toUpperCase().contains(_searchText.toUpperCase()))
+        filteredLabs.add(lab);
+    });
+
+    if (filteredLabs.isEmpty)
+      return Center(child: Text('Laboratório(s) não encontrado(s)'));
+
+    return ListView.builder(
+      itemCount: filteredLabs.length,
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          title: Text(filteredLabs[index].name),
+          subtitle: Text(
+              'Capacidade: ${filteredLabs[index].capacity.toString()} pessoas'),
+          trailing: PopupMenuButton<String>(
+            onSelected: _popupSelect,
+            itemBuilder: (BuildContext context) {
+              return _popupChoices.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(
+                    choice,
+                    style: TextStyle(color: Color(0xFF4F4F4F)),
+                  ),
+                );
+              }).toList();
+            },
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Laboratorio>>(
-      stream: ListarLaboratorioModule.to.bloc<LaboratorioBloc>().laboratorios,
-      initialData: [],
-      builder: (context, snapshot) {
-        return Scaffold(
-          appBar: AppBar(
-            title: _appBarTitle,
-            actions: <Widget>[
-              IconButton(
-                icon: _searchIcon,
-                onPressed: () => _searchPressed(),
-              )
-            ],
-          ),
-          body: Center(
-            child: Text('Hello Listar Laboratórios'),
-          ),
-        );
-      }
-    );
+        stream: ListarLaboratorioModule.to.bloc<LaboratorioBloc>().laboratorios,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              title: _appBarTitle,
+              actions: <Widget>[
+                IconButton(
+                  icon: _searchIcon,
+                  onPressed: () => _searchPressed(),
+                )
+              ],
+            ),
+            body: snapshot.hasData ? _buildList(snapshot.data) : Center(child: CircularProgressIndicator()),
+          );
+        });
   }
 }
