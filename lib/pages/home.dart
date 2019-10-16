@@ -1,3 +1,4 @@
+import 'package:comunicalab_frontend/app/src/equipamentos/EquipamentoWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -72,7 +73,8 @@ class HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   title: Text('Listar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
-                  onTap: (){},
+                  onTap: (){                                     
+                  },
                 ),
                 ListTile(
                   title: Text('Registrar instalação', style: TextStyle(color: Color(0xFF6A5ACD))),
@@ -94,7 +96,12 @@ class HomePageState extends State<HomePage> {
                 ),
                 ListTile(
                   title: Text('Listar equipamentos', style: TextStyle(color: Color(0xFF6A5ACD))),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                            return EquipamentoWidget();
+                          }));  
+                  },
                 ),
                 ListTile(
                   title: Text('Cadastrar categorias', style: TextStyle(color: Color(0xFF6A5ACD))),
