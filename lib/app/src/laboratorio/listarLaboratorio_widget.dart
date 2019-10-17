@@ -20,6 +20,9 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
     'Ver equipamentos'
   ];
 
+  bool ifDelete = false;
+  bool ifSuccessful = false;
+
   ListarLaboratorioState() {
     _filter.addListener(() {
       if (_filter.text.isEmpty) {
@@ -31,6 +34,14 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
           _searchText = _filter.text;
         });
       }
+    });
+
+    ListarLaboratorioModule.to.bloc<LaboratorioBloc>().deleted.listen((deleted) {
+      if (deleted)
+        ifSuccessful = true;
+      else
+        ifSuccessful = false;
+      Navigator.of(context).pop();
     });
   }
 
@@ -56,13 +67,81 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
     });
   }
 
-  void _popupSelect(String choice) {
-    /*if(choice == 'Editar laboratório')
-      rota para tela de editar laboratório
-    else if(choice == 'Excluir laboratório')
-      rota para tela de excluir laboratório
+  void _popupSelect(String choice, Laboratorio lab) async {
+    if(choice == 'Editar laboratório')
+      print('Editar laboratorio');
+    else if(choice == 'Excluir laboratório'){
+    ifDelete = false;
+    ifSuccessful = false;
+
+      await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Tem certeza que deseja excluir?'),
+              content: Text('O laboratório será excluido permanentemente.'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Cancelar'),
+                  textColor: Color(0xFF000080),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                FlatButton(
+                  child: Text('OK'),
+                  textColor: Color(0xFF000080),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    ifDelete = true;
+                  },
+                )
+              ],
+            );
+          });      
+
+      if(ifDelete){
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            //comando de deletar laboratorio usando a API do backend
+            ListarLaboratorioModule.to.bloc<LaboratorioBloc>().inDeleteTodo.add(lab.id);
+
+            return SimpleDialog(children: <Widget>[
+              Column(children: <Widget>[
+                Container(
+                  child: Text('Processando...', style: TextStyle(color: Color(0xFF4F4F4F), fontSize: 16)),
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                CircularProgressIndicator()
+              ],)
+            ]);
+          });
+
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(ifSuccessful ? 'Laboratório excluido' : 'Erro'),
+              content: Text(ifSuccessful ? 'Laboratório excluido com sucesso' : 'Ocorreu um erro ao tentar excluir o laboratório'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  textColor: Color(0xFF000080),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+      }
+    }
     else 
-      rota para tela de exibição de equipamentos do laboratório*/
+      print('Ver equipamentos');
   }
 
   Widget _buildList(List<Laboratorio> labs) {
@@ -87,7 +166,7 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
                 'Capacidade: ${filteredLabs[index].capacity.toString()} pessoas',
                 style: TextStyle(color: Color(0xFF4682B4))),
             trailing: PopupMenuButton<String>(
-              onSelected: _popupSelect,
+              onSelected: (choice) => _popupSelect(choice, filteredLabs[index]),
               itemBuilder: (BuildContext context) {
                 return _popupChoices.map((String choice) {
                   return PopupMenuItem<String>(
