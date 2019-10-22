@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:bloc_pattern/bloc_pattern.dart';
-import 'package:comunicalab_frontend/app/src/laboratorio/models/laboratorio_model.dart';
+import '../models/laboratorio_model.dart';
 
 class LaboratorioBloc extends BlocBase{
   //GET Laboratorios

@@ -41,7 +41,6 @@ class Laboratorio {
     data['status'] = this.status;
     data['capacity'] = this.capacity;
     data['isDeleted'] = this.isDeleted;
-    data['isNaosei'] = this.isNaosei;
     return data;
   }
 }

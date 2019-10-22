@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:comunicalab_frontend/app/src/laboratorio/listarLaboratorio_module.dart';
+import '../app/src/laboratorio/modules/listarLaboratorio/listarLaboratorio_module.dart';
 
 class HomePage extends StatefulWidget {
   @override

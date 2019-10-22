@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:comunicalab_frontend/app/src/laboratorio/listarLaboratorio_module.dart';
-import 'package:comunicalab_frontend/app/src/laboratorio/models/laboratorio_model.dart';
-import 'package:comunicalab_frontend/app/src/laboratorio/laboratorio_bloc.dart';
+import 'listarLaboratorio_module.dart';
+import '../../models/laboratorio_model.dart';
+import '../../bloc/laboratorio_bloc.dart';
 
 class ListarLaboratorio extends StatefulWidget {
   @override
