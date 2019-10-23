@@ -1,3 +1,4 @@
+import 'package:comunicalab_frontend/app/src/laboratorio/modules/editaLaboratorio/editarLaboratorio_module.dart';
 import 'package:flutter/material.dart';
 import 'listarLaboratorio_module.dart';
 import '../../models/laboratorio_model.dart';
@@ -69,7 +70,8 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
 
   void _popupSelect(String choice, Laboratorio lab) async {
     if(choice == 'Editar laboratório')
-      print('Editar laboratorio');
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (BuildContext context) => EditarLaboratorioModule(lab: lab)));
     else if(choice == 'Excluir laboratório'){
     ifDelete = false;
     ifSuccessful = false;
