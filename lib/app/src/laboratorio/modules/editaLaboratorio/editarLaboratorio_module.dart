@@ -1,7 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'editarLaboratorio_widget.dart';
-import '../../bloc/laboratorio_bloc.dart';
 import '../../models/laboratorio_model.dart';
 
 class EditarLaboratorioModule extends ModuleWidget{
@@ -10,9 +9,7 @@ class EditarLaboratorioModule extends ModuleWidget{
   final Laboratorio lab;
 
   @override
-  List<Bloc> get blocs => [
-    Bloc((i) => LaboratorioBloc())
-  ];
+  List<Bloc> get blocs => [];
 
   @override
   List<Dependency> get dependencies => null;

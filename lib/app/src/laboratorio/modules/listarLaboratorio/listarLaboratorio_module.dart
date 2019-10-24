@@ -6,7 +6,7 @@ import '../../bloc/laboratorio_bloc.dart';
 class ListarLaboratorioModule extends ModuleWidget{
   @override
   List<Bloc> get blocs => [
-    Bloc((i) => LaboratorioBloc())
+    Bloc((i) => LaboratorioBloc(), singleton: true)
   ];
 
   @override

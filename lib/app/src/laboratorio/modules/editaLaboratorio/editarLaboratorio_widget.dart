@@ -1,4 +1,6 @@
-import 'package:comunicalab_frontend/app/src/laboratorio/models/laboratorio_model.dart';
+import '../../models/laboratorio_model.dart';
+import '../listarLaboratorio/listarLaboratorio_module.dart';
+import '../../bloc/laboratorio_bloc.dart';
 import 'package:flutter/material.dart';
 
 class EditarLaboratorio extends StatefulWidget {
@@ -17,6 +19,16 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
 
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
+
+  EditarLaboratorioState(){
+    ListarLaboratorioModule.to.bloc<LaboratorioBloc>().deleted.listen((deleted) {
+      if (deleted)
+        ifDeleted = true;
+      else
+        ifDeleted = false;
+      Navigator.of(context).pop();
+    });
+  }
 
   void _appBarPopupSelect(choice) async {
     if(choice == 'Excluir laboratório'){
@@ -49,7 +61,47 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
               ],
             );
           });
-      //implementar restante da lógica de exclusão do labooratório
+
+      if(ifDeleteChosen){
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            //comando de deletar laboratorio usando a API do backend
+            ListarLaboratorioModule.to.bloc<LaboratorioBloc>().inDeleteTodo.add(widget.lab.id);
+
+            return SimpleDialog(children: <Widget>[
+              Column(children: <Widget>[
+                Container(
+                  child: Text('Processando...', style: TextStyle(color: Color(0xFF4F4F4F), fontSize: 16)),
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                CircularProgressIndicator()
+              ],)
+            ]);
+          });
+
+        await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(ifDeleted ? 'Laboratório excluido' : 'Erro'),
+              content: Text(ifDeleted ? 'Laboratório excluido com sucesso' : 'Ocorreu um erro ao tentar excluir o laboratório'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  textColor: Color(0xFF000080),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    if(ifDeleted)
+                      Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+      }
     }
   }
 
