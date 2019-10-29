@@ -17,6 +17,13 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
     'Excluir laboratório'
     ];
 
+  TextEditingController _nomeController,
+                        _localizacaoController,
+                        _latitudeController,
+                        _longitudeController,
+                        _statusController,
+                        _capacidadeController;
+
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
 
@@ -126,7 +133,95 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
           )
         ],
       ),
-      body: Center(child: Text('Editar laboratório')),
+      body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 30.0)),
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: TextField(
+                    controller: _nomeController,
+                    decoration: InputDecoration(
+                      hintText: "Nome",
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15.0)),
+              Container(
+                  constraints: BoxConstraints(maxWidth: 350),
+                  child: TextField(
+                    controller: _localizacaoController,
+                    decoration: InputDecoration(
+                      hintText: "Localização",
+                    ),
+                    keyboardType: TextInputType.text,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15.0)),
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: Row(
+                    children: <Widget>[
+                      Flexible(
+                        child: TextField(
+                          controller: _latitudeController,
+                          decoration: InputDecoration(
+                          hintText: "Latitude",
+                          ),
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 20.0)),
+                      Flexible(
+                        child: TextField(
+                          controller: _longitudeController,
+                          decoration: InputDecoration(
+                          hintText: "Longitude",
+                          ),
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      )
+                    ],
+                  ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15.0)),
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: Row(
+                    children: <Widget>[
+                      Flexible(
+                        flex: 2,
+                        child: TextField(
+                          controller: _statusController,
+                          decoration: InputDecoration(
+                          hintText: "Status",
+                          ),
+                          keyboardType: TextInputType.text,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.only(left: 20.0)),
+                      Flexible(
+                        flex: 1,
+                        child: TextField(
+                          controller: _capacidadeController,
+                          decoration: InputDecoration(
+                          hintText: "Capacidade",
+                          ),
+                          keyboardType: TextInputType.number,
+                          style: TextStyle(fontSize: 16.0),
+                        ),
+                      )
+                    ],
+                ),
+              ),
+              Container()
+            ]),
     );
   }
 }
