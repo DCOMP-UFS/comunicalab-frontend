@@ -93,7 +93,6 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
                   child: Text('OK'),
                   textColor: Color(0xFF000080),
                   onPressed: () {
-                    Navigator.of(context).pop();
                     if(ifDeleted)
                       Navigator.of(context).pop();
                   },
