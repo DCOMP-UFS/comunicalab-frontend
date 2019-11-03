@@ -57,6 +57,17 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
     _dropdownValue = widget.lab.status;
   }
 
+  void _handleConfirmation(){
+    Laboratorio putLab = Laboratorio(name: _nomeController.text,
+                                    location: _localizacaoController.text,
+                                    latitude: double.parse(_latitudeController.text),
+                                    longitude: double.parse(_longitudeController.text),
+                                    capacity: int.parse(_capacidadeController.text),
+                                    status: _dropdownValue);
+
+    print('${putLab.name} | ${putLab.latitude} | ${putLab.capacity} | ${putLab.status}'); //print debug
+  }
+
   void _appBarPopupSelect(choice) async {
     if(choice == 'Excluir laboratório'){
       ifDeleteChosen = false;
@@ -253,6 +264,24 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
                         ),
                       )
                     ],
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(top: 15.0)),
+              Container(
+                constraints: BoxConstraints(maxWidth: 350),
+                child: SizedBox(
+                  height: 50.0,
+                  width: double.infinity,
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0)),
+                    color: Color(0xFF000080),
+                    textColor: Color(0xFFFFFFFF),
+                    onPressed: () => _handleConfirmation(),
+                    child: new Text(
+                      "Editar",
+                    ),
+                  ),
                 ),
               ),
               Container()
