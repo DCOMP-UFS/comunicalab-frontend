@@ -216,19 +216,28 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
                     children: <Widget>[
                       Flexible(
                         flex: 2,
-                        child: DropdownButton(
-                            items: _dropdownChoices.map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            value: _dropdownValue,
-                            isExpanded: true,
-                            hint: new Text("Select City"),
-                            onChanged: (value){
-                              setState(() => _dropdownValue = value);
-                            }
+                        child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: 10.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            border: Border.all(color: Color(0xFF000080), width: 2.0)
+                          ),
+                          child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                                  items: _dropdownChoices.map<DropdownMenuItem<String>>((String value) {
+                                    return DropdownMenuItem<String>(
+                                      value: value,
+                                      child: Text(value),
+                                    );
+                                  }).toList(),
+                                  value: _dropdownValue,
+                                  isExpanded: true,
+                                  hint: new Text("Status"),
+                                  onChanged: (value){
+                                    setState(() => _dropdownValue = value);
+                                  }
+                              )
+                          ),
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(left: 20.0)),
