@@ -17,15 +17,23 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
     'Excluir laboratório'
     ];
 
-  TextEditingController _nomeController,
-                        _localizacaoController,
-                        _latitudeController,
-                        _longitudeController,
-                        _statusController,
-                        _capacidadeController;
+  final List<String> _dropdownChoices = [
+    'Disponível',
+    'Reservado',
+    'Em aula',
+    'Em reforma'
+  ];
+
+  TextEditingController _nomeController = TextEditingController(),
+                        _localizacaoController = TextEditingController(),
+                        _latitudeController = TextEditingController(),
+                        _longitudeController = TextEditingController(),
+                        _capacidadeController = TextEditingController();
 
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
+
+  String _dropdownValue;
 
   EditarLaboratorioState(){
     ListarLaboratorioModule.to.bloc<LaboratorioBloc>().deleted.listen((deleted) {
@@ -35,6 +43,18 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
         ifDeleted = false;
       Navigator.of(context).pop();
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _nomeController.text = widget.lab.name;
+    _localizacaoController.text = widget.lab.location;
+    _latitudeController.text = widget.lab.latitude.toString();
+    _longitudeController.text = widget.lab.longitude.toString();
+    _capacidadeController.text = widget.lab.capacity.toString();
+    _dropdownValue = widget.lab.status;
   }
 
   void _appBarPopupSelect(choice) async {
@@ -196,13 +216,19 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
                     children: <Widget>[
                       Flexible(
                         flex: 2,
-                        child: TextField(
-                          controller: _statusController,
-                          decoration: InputDecoration(
-                          hintText: "Status",
-                          ),
-                          keyboardType: TextInputType.text,
-                          style: TextStyle(fontSize: 16.0),
+                        child: DropdownButton(
+                            items: _dropdownChoices.map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                            value: _dropdownValue,
+                            isExpanded: true,
+                            hint: new Text("Select City"),
+                            onChanged: (value){
+                              setState(() => _dropdownValue = value);
+                            }
                         ),
                       ),
                       Padding(padding: EdgeInsets.only(left: 20.0)),
