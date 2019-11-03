@@ -7,7 +7,6 @@ class Laboratorio {
   String status;
   int capacity;
   bool isDeleted;
-  bool isNaosei;
 
   Laboratorio(
       {this.id,
@@ -17,8 +16,7 @@ class Laboratorio {
       this.longitude,
       this.status,
       this.capacity,
-      this.isDeleted,
-      this.isNaosei});
+      this.isDeleted});
 
   Laboratorio.fromJson(Map<String, dynamic> json) {
     id = json['id'];
