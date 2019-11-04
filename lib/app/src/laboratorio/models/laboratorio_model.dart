@@ -2,11 +2,10 @@ class Laboratorio {
   int id;
   String name;
   String location;
-  double latitude;
-  double longitude;
   String status;
   int capacity;
   bool isDeleted;
+  bool active;
 
   Laboratorio(
       {this.id,
@@ -14,7 +13,8 @@ class Laboratorio {
       this.location,
       this.status,
       this.capacity,
-      this.isDeleted});
+      this.isDeleted,
+      this.active});
 
   Laboratorio.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -23,6 +23,7 @@ class Laboratorio {
     status = json['status'];
     capacity = json['capacity'];
     isDeleted = json['isDeleted'];
+    active = json['active'];
   }
 
   Map<String, dynamic> toJson() {
@@ -33,6 +34,7 @@ class Laboratorio {
     data['status'] = this.status;
     data['capacity'] = this.capacity;
     data['isDeleted'] = this.isDeleted;
+    data['active'] = this.active;
     return data;
   }
 }
