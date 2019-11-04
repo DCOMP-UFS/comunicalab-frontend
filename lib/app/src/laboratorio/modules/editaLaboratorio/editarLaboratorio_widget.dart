@@ -32,8 +32,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
 
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
-  bool ifUpdated = false;
-  
+
   StreamSubscription deletedStream, updatedStream;
 
   EditarLaboratorioState() {
@@ -51,17 +50,34 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
     updatedStream = ListarLaboratorioModule.to
         .bloc<LaboratorioBloc>()
         .updated
-        .listen((updated) {
-      if (updated)
-        ifUpdated = true;
-      else
-        ifUpdated = false;
+        .listen((updated) async {
+      Navigator.of(context).pop();
+      await showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(updated ? 'Laboratório editado' : 'Erro'),
+              content: Text(updated
+                  ? 'Laboratório editado com sucesso'
+                  : 'Ocorreu um erro ao tentar editar o laboratório'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('OK'),
+                  textColor: Color(0xFF000080),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
       Navigator.of(context).pop();
     });
   }
-  
+
   @override
-  void dispose(){
+  void dispose() {
     deletedStream.cancel();
     updatedStream.cancel();
     super.dispose();
@@ -78,6 +94,24 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
   }
 
   void _handleUpdateConfirmation() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return SimpleDialog(children: <Widget>[
+            Column(
+              children: <Widget>[
+                Container(
+                  child: Text('Processando...',
+                      style: TextStyle(color: Color(0xFF4F4F4F), fontSize: 16)),
+                  padding: EdgeInsets.only(bottom: 10.0),
+                ),
+                CircularProgressIndicator()
+              ],
+            )
+          ]);
+        });
+
     Laboratorio putLab = Laboratorio(
         id: widget.lab.id,
         name: _nomeController.text,
@@ -86,10 +120,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
         status: _dropdownValue,
         active: widget.lab.active);
 
-    ListarLaboratorioModule.to
-                  .bloc<LaboratorioBloc>()
-                  .inUpdateLab
-                  .add(putLab);
+    ListarLaboratorioModule.to.bloc<LaboratorioBloc>().inUpdateLab.add(putLab);
   }
 
   void _appBarPopupSelect(choice) async {
@@ -129,8 +160,8 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
             context: context,
             barrierDismissible: false,
             builder: (BuildContext context) {
-              //comando de deletar laboratorio usando a API do backend
-              ListarLaboratorioModule.to
+              ListarLaboratorioModule
+                  .to //comando de deletar laboratorio usando a API do backend
                   .bloc<LaboratorioBloc>()
                   .inDeleteLab
                   .add(widget.lab.id);
