@@ -109,7 +109,7 @@ class ListarLaboratorioState extends State<ListarLaboratorio> {
           barrierDismissible: false,
           builder: (BuildContext context) {
             //comando de deletar laboratorio usando a API do backend
-            ListarLaboratorioModule.to.bloc<LaboratorioBloc>().inDeleteTodo.add(lab.id);
+            ListarLaboratorioModule.to.bloc<LaboratorioBloc>().inDeleteLab.add(lab.id);
 
             return SimpleDialog(children: <Widget>[
               Column(children: <Widget>[

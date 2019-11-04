@@ -11,7 +11,7 @@ class LaboratorioBloc extends BlocBase{
 
   //DELETE ToDos
   final _deleteLaboratorioController = StreamController<int>.broadcast();
-  StreamSink<int> get inDeleteTodo => _deleteLaboratorioController.sink;
+  StreamSink<int> get inDeleteLab => _deleteLaboratorioController.sink;
 
   final _deletedLaboratorioController = StreamController<bool>.broadcast();
   StreamSink<bool> get _inDeleted => _deletedLaboratorioController.sink;
@@ -19,7 +19,7 @@ class LaboratorioBloc extends BlocBase{
 
   //PUT ToDos
   final _updateLaboratorioController = StreamController<Laboratorio>.broadcast();
-  StreamSink<Laboratorio> get inUpdateTodo => _updateLaboratorioController.sink;
+  StreamSink<Laboratorio> get inUpdateLab => _updateLaboratorioController.sink;
 
   final _updatedLaboratorioController = StreamController<bool>.broadcast();
   StreamSink<bool> get _inUpdated => _deletedLaboratorioController.sink;

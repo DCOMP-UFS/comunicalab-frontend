@@ -116,7 +116,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
               //comando de deletar laboratorio usando a API do backend
               ListarLaboratorioModule.to
                   .bloc<LaboratorioBloc>()
-                  .inDeleteTodo
+                  .inDeleteLab
                   .add(widget.lab.id);
 
               return SimpleDialog(children: <Widget>[
