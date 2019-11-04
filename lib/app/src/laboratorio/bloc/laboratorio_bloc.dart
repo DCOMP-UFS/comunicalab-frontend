@@ -17,10 +17,19 @@ class LaboratorioBloc extends BlocBase{
   StreamSink<bool> get _inDeleted => _deletedLaboratorioController.sink;
   Stream<bool> get deleted => _deletedLaboratorioController.stream;
 
+  //PUT ToDos
+  final _updateLaboratorioController = StreamController<Laboratorio>.broadcast();
+  StreamSink<Laboratorio> get inUpdateTodo => _updateLaboratorioController.sink;
+
+  final _updatedLaboratorioController = StreamController<bool>.broadcast();
+  StreamSink<bool> get _inUpdated => _deletedLaboratorioController.sink;
+  Stream<bool> get updated => _deletedLaboratorioController.stream;
+
   LaboratorioBloc() {
     getLaboratorios();
 
     _deleteLaboratorioController.stream.listen(_handleDeleteLaboratorio);
+    _updateLaboratorioController.stream.listen(_handleUpdateLaboratorio);
   }
 
   @override
@@ -28,8 +37,22 @@ class LaboratorioBloc extends BlocBase{
     _laboratorioController.close();
     _deleteLaboratorioController.close();
     _deletedLaboratorioController.close();
+    _updateLaboratorioController.close();
+    _updatedLaboratorioController.close();
 
     super.dispose();
+  }
+
+  Future<void> _handleUpdateLaboratorio(Laboratorio lab) async {
+    Response response = await Dio().put('https://comunicabackdev.herokuapp.com/laboratory/', data: lab.toJson());
+
+    if(response.statusCode == 200){
+      print('foi');
+      _inUpdated.add(true);
+      getLaboratorios();
+    }
+    else
+      _inUpdated.add(false);
   }
 
   Future<void> _handleDeleteLaboratorio(int numLaboratorio) async {

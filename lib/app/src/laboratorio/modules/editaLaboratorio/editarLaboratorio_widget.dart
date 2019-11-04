@@ -28,6 +28,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
 
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
+  bool ifUpdated = false;
 
   String _dropdownValue;
 
@@ -42,6 +43,17 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
         ifDeleted = false;
       Navigator.of(context).pop();
     });
+
+    ListarLaboratorioModule.to
+        .bloc<LaboratorioBloc>()
+        .updated
+        .listen((updated) {
+      if (updated)
+        ifUpdated = true;
+      else
+        ifUpdated = false;
+      Navigator.of(context).pop();
+    });
   }
 
   @override
@@ -54,7 +66,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
     _dropdownValue = widget.lab.status;
   }
 
-  void _handleConfirmation() {
+  void _handleUpdateConfirmation() {
     Laboratorio putLab = Laboratorio(
         name: _nomeController.text,
         location: _localizacaoController.text,
@@ -240,7 +252,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
                       borderRadius: BorderRadius.circular(5.0)),
                   color: Color(0xFF000080),
                   textColor: Color(0xFFFFFFFF),
-                  onPressed: () => _handleConfirmation(),
+                  onPressed: () => _handleUpdateConfirmation(),
                   child: new Text(
                     "Editar",
                   ),
