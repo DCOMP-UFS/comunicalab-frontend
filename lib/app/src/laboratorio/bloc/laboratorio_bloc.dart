@@ -9,7 +9,7 @@ class LaboratorioBloc extends BlocBase{
   StreamSink<List<Laboratorio>> get _inLaboratorios => _laboratorioController.sink;
   Stream<List<Laboratorio>> get laboratorios => _laboratorioController.stream;
 
-  //DELETE ToDos
+  //DELETE Laboratorios
   final _deleteLaboratorioController = StreamController<int>.broadcast();
   StreamSink<int> get inDeleteLab => _deleteLaboratorioController.sink;
 
@@ -17,13 +17,13 @@ class LaboratorioBloc extends BlocBase{
   StreamSink<bool> get _inDeleted => _deletedLaboratorioController.sink;
   Stream<bool> get deleted => _deletedLaboratorioController.stream;
 
-  //PUT ToDos
+  //PUT Laboratorios
   final _updateLaboratorioController = StreamController<Laboratorio>.broadcast();
   StreamSink<Laboratorio> get inUpdateLab => _updateLaboratorioController.sink;
 
   final _updatedLaboratorioController = StreamController<bool>.broadcast();
-  StreamSink<bool> get _inUpdated => _deletedLaboratorioController.sink;
-  Stream<bool> get updated => _deletedLaboratorioController.stream;
+  StreamSink<bool> get _inUpdated => _updatedLaboratorioController.sink;
+  Stream<bool> get updated => _updatedLaboratorioController.stream;
 
   LaboratorioBloc() {
     getLaboratorios();
@@ -44,10 +44,11 @@ class LaboratorioBloc extends BlocBase{
   }
 
   Future<void> _handleUpdateLaboratorio(Laboratorio lab) async {
-    Response response = await Dio().put('https://comunicabackdev.herokuapp.com/laboratory/', data: lab.toJson());
+
+    Response response = await Dio().put('https://comunicabackdev.herokuapp.com/laboratory/${lab.id}',
+    data: {'name': lab.name, 'location': lab.location, 'status': lab.status, 'capacity': lab.capacity.toString(), 'active': lab.active.toString()});
 
     if(response.statusCode == 200){
-      print('foi');
       _inUpdated.add(true);
       getLaboratorios();
     }
@@ -57,7 +58,6 @@ class LaboratorioBloc extends BlocBase{
 
   Future<void> _handleDeleteLaboratorio(int numLaboratorio) async {
     Response response = await Dio().delete('https://comunicabackdev.herokuapp.com/laboratory/${numLaboratorio.toString()}');
-
     if(response.statusCode == 200){
       _inDeleted.add(true);
       getLaboratorios();

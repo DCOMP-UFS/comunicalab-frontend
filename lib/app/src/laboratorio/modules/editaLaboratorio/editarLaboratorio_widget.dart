@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../models/laboratorio_model.dart';
 import '../listarLaboratorio/listarLaboratorio_module.dart';
 import '../../bloc/laboratorio_bloc.dart';
@@ -26,14 +28,16 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
       _localizacaoController = TextEditingController(),
       _capacidadeController = TextEditingController();
 
+  String _dropdownValue;
+
   bool ifDeleteChosen = false;
   bool ifDeleted = false;
   bool ifUpdated = false;
-
-  String _dropdownValue;
+  
+  StreamSubscription deletedStream, updatedStream;
 
   EditarLaboratorioState() {
-    ListarLaboratorioModule.to
+    deletedStream = ListarLaboratorioModule.to
         .bloc<LaboratorioBloc>()
         .deleted
         .listen((deleted) {
@@ -44,7 +48,7 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
       Navigator.of(context).pop();
     });
 
-    ListarLaboratorioModule.to
+    updatedStream = ListarLaboratorioModule.to
         .bloc<LaboratorioBloc>()
         .updated
         .listen((updated) {
@@ -54,6 +58,13 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
         ifUpdated = false;
       Navigator.of(context).pop();
     });
+  }
+  
+  @override
+  void dispose(){
+    deletedStream.cancel();
+    updatedStream.cancel();
+    super.dispose();
   }
 
   @override
@@ -68,12 +79,17 @@ class EditarLaboratorioState extends State<EditarLaboratorio> {
 
   void _handleUpdateConfirmation() {
     Laboratorio putLab = Laboratorio(
+        id: widget.lab.id,
         name: _nomeController.text,
         location: _localizacaoController.text,
         capacity: int.parse(_capacidadeController.text),
-        status: _dropdownValue);
+        status: _dropdownValue,
+        active: widget.lab.active);
 
-    print('${putLab.name} | ${putLab.capacity} | ${putLab.status}'); //print debug
+    ListarLaboratorioModule.to
+                  .bloc<LaboratorioBloc>()
+                  .inUpdateLab
+                  .add(putLab);
   }
 
   void _appBarPopupSelect(choice) async {
