@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:comunicalab_frontend/pages/home.dart';
+import 'home.dart';
 
 class LoginPage extends StatefulWidget {
 
