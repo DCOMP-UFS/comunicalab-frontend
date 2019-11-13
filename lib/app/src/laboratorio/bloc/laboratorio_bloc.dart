@@ -25,11 +25,21 @@ class LaboratorioBloc extends BlocBase{
   StreamSink<bool> get _inUpdated => _updatedLaboratorioController.sink;
   Stream<bool> get updated => _updatedLaboratorioController.stream;
 
+  //Create Lab
+  final _createLaboratorioController = StreamController<Laboratorio>.broadcast();
+  StreamSink<Laboratorio> get inCreateLab => _createLaboratorioController.sink;
+
+  final _createdLaboratorioController = StreamController<bool>.broadcast();
+  StreamSink<bool> get _inCreated => _createdLaboratorioController.sink;
+  Stream<bool> get created => _createdLaboratorioController.stream;
+  
+
   LaboratorioBloc() {
     getLaboratorios();
 
     _deleteLaboratorioController.stream.listen(_handleDeleteLaboratorio);
     _updateLaboratorioController.stream.listen(_handleUpdateLaboratorio);
+    _createLaboratorioController.stream.listen(_handleCreateLaboratorio);
   }
 
   @override
@@ -39,6 +49,8 @@ class LaboratorioBloc extends BlocBase{
     _deletedLaboratorioController.close();
     _updateLaboratorioController.close();
     _updatedLaboratorioController.close();
+    _createLaboratorioController.close();
+    _createdLaboratorioController.close();
 
     super.dispose();
   }
@@ -54,6 +66,18 @@ class LaboratorioBloc extends BlocBase{
     }
     else
       _inUpdated.add(false);
+  }
+
+  Future<void> _handleCreateLaboratorio(Laboratorio lab) async {
+    Response response = await Dio().post('https://comunicabackdev.herokuapp.com/laboratory/',
+    data: {'name': lab.name, 'location': lab.location, 'status': lab.status, 'capacity': lab.capacity.toString()});
+    print(response.data);
+    if(response.statusCode == 201){
+      _inCreated.add(true);
+      getLaboratorios();
+    }
+    else
+      _inCreated.add(false);
   }
 
   Future<void> _handleDeleteLaboratorio(int numLaboratorio) async {

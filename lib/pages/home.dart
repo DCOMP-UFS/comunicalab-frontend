@@ -1,3 +1,4 @@
+import 'package:comunicalab_frontend/app/src/laboratorio/modules/criarLaboratorio/criarLaboratorio_module.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../app/src/laboratorio/modules/listarLaboratorio/listarLaboratorio_module.dart';
@@ -112,7 +113,11 @@ class HomePageState extends State<HomePage> {
               children: <Widget>[
                 ListTile(
                   title: Text('Cadastrar laboratório', style: TextStyle(color: Color(0xFF6A5ACD))),
-                  onTap: (){},
+                  onTap: (){
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            CriarLaboratorioModule()));
+                  },
                 ),
                 ListTile(
                   title: Text('Listar laboratórios', style: TextStyle(color: Color(0xFF6A5ACD))),
